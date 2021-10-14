@@ -1,56 +1,527 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+    <title>cdynak / linux2018</title>
 
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/black.css" />
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>Slide 1</section>
-        <section>Slide 2</section>
+
+        <section>
+          <h1>Let's build a Node.js container!</h1>
+          <h2>Cezary Dynak</h2>
+          <h3>2021-04</h3>
+        </section>
+        <!-- https://github.com/impress/impress.js/wiki/Examples-and-demos -->
+        <!-- https://github.com/hakimel/reveal.js/wiki/Example-Presentations -->
+
+        <section>
+          <section>
+            <h2>CEZARY DYNAK</h3>
+            <h3>about me</h3>
+          </section>
+          <section>
+            <h2>SOME TIME AGO...</h2>
+            <ul>
+              <li>Wrocław University of Science and Technology</li>
+              <li>Faculty of Electronics / W4</li>
+              <li>Department of Cybernetics and Robotics / K7</li>
+              <li>Laboratory 07/C-3 (diablo/panamint)</li>
+              <li>Automatyka i Robotyka / Embedded Robotics</li>
+            </ul>
+          </section>
+          <section>
+            <h2>RECENTLY</h2>
+            <a href="http://www.spyro-soft.com"><img src="http://www.spyro-soft.com/wp-content/themes/spyro/img/logo.svg" /></a>
+            <ul>
+              <li>Node.js developer</li>
+              <li>IoT back-end (cloud)</li>
+              <li><a href="mailto:cdynak@spyro-soft.com">cdynak@spyro-soft.com</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2>CURRENTLY</h2>
+            <ul>
+              <li>Head of Node.js</li>
+              <li>Strategic Services</li>
+              <li><a href="mailto:cezary.dynak@stxnext.pl">cezary.dynak@stxnext.pl</a></li>
+            </ul>
+          </section>
+          <section>
+              <br></br>
+              <ul>
+                <li><a href="https://github.com/cdynak">github.com/cdynak</a></li>
+                <li><a href="https://linkedin.com/in/cdynak">linkedin.com/in/cdynak</a></li>
+                <li><a href="https://last.fm/user/cezdyn">last.fm/user/cezdyn</a></li>
+              </ul>
+          </section>
+        </section>
+
+
+        <!--section>
+          <section>
+            <h2>PLAN</h2>
+            <h4><a href="https://dynak-com.github.io/linux2021">dynak-com.github.io/linux2021</a></h4>
+            <ul>
+              <li>Embedded Linux build systems - comparison</li>
+              <ul>
+                <li>introduction</li>
+                <li>definitions</li>
+                <li>examples</li>
+              </ul>
+              <li>Embedded Linux build systems - applications</li>
+              <ul>
+                <li>IoT</li>
+                <li>cloud</li>
+                <li>edge</li>
+              </ul>
+            </ul>
+          </section>
+        </section-->
+
+        <section>
+          <section>
+            <h2>Linux</h2>
+            <h3>cloud / desktop / embedded</h3>
+          </section>
+          <section>
+            <h2>supercomputers</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Operating_systems_used_on_top_500_supercomputers.svg" />
+            <!-- https://commons.wikimedia.org/wiki/File:Operating_systems_used_on_top_500_supercomputers.svg -->
+            <!-- https://en.wikipedia.org/wiki/File:Operating_systems_used_on_top_500_supercomputers.svg -->
+            <!-- https://en.wikipedia.org/wiki/Usage_share_of_operating_systems -->
+          </section>
+          <section>
+            <h2>desktop</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Operatingsystem_market_share.svg" />
+            <!-- https://commons.wikimedia.org/wiki/File:Operatingsystem_market_share.svg -->
+            <!-- https://en.wikipedia.org/wiki/Usage_share_of_operating_systems -->
+          </section>
+          <section>
+            <h2>desktop</h2>
+            <img src="http://static4.businessinsider.com/image/505375a769bedda419000017-960/wintel-monopoly.jpg" />
+            <!-- www.businessinsider.com/mobile-market-share-2012-11 -->
+          </section>
+          <section>
+            <h2>mobile</h2>
+            <img src="http://zoomcloud.co.nz/wp-content/uploads/2014/08/Smartphone-Market-share.png" />
+            <!-- http://zoomcloud.co.nz/index.php/smartphone-market-share-2014-stars/ -->
+
+            <!-- http://static1.businessinsider.com/image/537b72f169bedd1e04384fab-1200-924/smartphoneosmarketshare.png -->
+            <!-- http://www.businessinsider.com/iphone-v-android-market-share-2014-5 -->
+          </section>
+          <section>
+            <h2>embedded</h2>
+            <img src="https://lcom.static.linuxfound.org/images/stories/41373/VDC-embedded-open-source-market.jpg" />
+            <!-- https://www.linux.com/news/embedded-linux-keeps-growing-amid-iot-disruption-says-study -->
+          </section>
+        </section>
+
+
+        <section>
+          <section>
+            <h2>Embedded Linux</h2>
+          </section>
+          <section>
+            <h2>so...
+            <h2>What are the Embedded Linux build systems?!</h2>
+          </section>
+          <section>
+            <h3>For a lot of people it all starts with...</h3>
+            <img src="https://elinux.org/images/thumb/9/96/RpiFront.jpg/800px-RpiFront.jpg" />
+          </section>
+          <section>
+            <h3>But there are others...</h3>
+            <ul>
+              <li>https://raspberrypi.org</li>
+              <li>https://beagleboard.org/black</li>
+              <li>http://wiki.litesom.grinn-global.com</li>
+              <li>https://wandboard.org</li>
+              <li>http://pandaboard.org</li>
+            </ul>
+            <!-- https://en.wikipedia.org/wiki/Comparison_of_single-board_computers -->
+            <!-- https://hackaday.com/2017/06/19/intel-discontinues-joule-galileo-and-edison-product-lines/ -->
+          </section>
+          <section>
+            <img src="img/dev-boards.png" />
+          </section>
+          <section>
+            <h3>But why?</h3>
+            <ul>
+              <li>for prototyping</li>
+              <li>for promotion</li>
+              <li>for learning</li>
+              <li>for fun</li>
+            </ul>
+          </section>
+          <section>
+            <h3>How to make it work?</h3>
+            <ul>
+              <li>Download dedicated OS image from web</li>
+              <li>or... build own image!</li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+wget https://downloads.raspberrypi.org/raspbian_latest
+
+pv sdcard.img | dd of=/dev/sdb bs=4M oflag=dsync
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Testing and Comparing</h1>
+            <ul>
+              <li>Representative set of embedded devices</li>
+              <li>Available open source distribution builders</li>
+            </ul>
+          </section>
+
+
+
+          <section>
+            <img height="100" src="https://buildroot.org/images/logo.png" />
+            <img src="https://openwrt.org/lib/tpl/openwrt/images/logo.png" />
+            <img height="150" src="http://ltib.org/graphics/ltib_build.png" />
+            <img height="150" src="https://www.ptxdist.org/images/PTXdist_Logo_RGB.svg" />
+            <img src="https://www.yoctoproject.org/wp-content/uploads/2020/05/YoctoProject_Logo_RGB_White_small.svg" />
+          </section>
+
+          <section>
+            <img src="img/builders-table.png" />
+          </section>
+
+          <section>
+            <h3>But there are others...</h3>
+            <ul>
+              <li>linux from scratch</li>
+              <li>debootstrap</li>
+              <li>wind river</li>
+            </ul>
+          </section>
+
+          <section>
+            <img src="img/os-builders-trends.png" />
+          </section>
+
+          <section>
+            <img src="img/openwrt-trends.png" />
+          </section>
+
+          <section>
+            <h3>generalized os builders structure</h3>
+            <ul>
+              <li>Source code</li>
+              <li>Host OS requirements</li>
+              <li>Cross-compilation toolchain</li>
+              <li>Target OS configuration</li>
+              <li>Produced output</li>
+            </ul>
+          </section>
+
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+apt-get install python-dev python-pip
+pip install python-openstackclient
+
+openstack server create --flavor 'c2-30' --image 'Debian 9' --network 'Ext-Net' --key-name 'my_key-name' '15sl1'
+
+ssh debian@51.68.145.251
+            </code></pre>
+          </section>
+
+
+          <section>
+            <img src="https://buildroot.org/images/logo.png" />
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+sudo apt update
+sudo apt upgrade
+sudo apt install make gcc g++ libncurses-dev unzip git patch python rsync bc bzip2
+wget https://buildroot.org/downloads/buildroot-2017.02.8.tar.gz
+tar -zxf buildroot-2017.02.8.tar.gz
+cd buildroot-2017.02.8/
+make raspberrypi_defconfig
+make
+ls output/images/sdcard.img
+            </code></pre>
+          </section>
+
+          <section>
+            <img src="https://openwrt.org/lib/tpl/openwrt/images/logo.png" />
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+sudo apt install make gcc g++ libncurses-dev unzip git gawk file zlib1g-dev     
+git clone -b v17.01.4 https://github.com/openwrt/openwrt                        
+cd openwrt/                                                                     
+./scripts/feeds update -a                                                       
+./scripts/feeds install -a                                                      
+make defconfig                                                                  
+make menuconfig                                                                 
+# Target System (Broadcom BCM27xx)                                              
+# Target Profile (Raspberry Pi B/B+/CM/Zero/ZeroW)                              
+time make -j                                                                    
+cp build_dir/target-arm_arm1176jzf-s+vfp_musl-1.1.16_eabi/linux-brcm2708_bcm2708/tmp/lede-brcm2708-bcm2708-rpi-ext4-sdcard.img ~
+            </code></pre>
+          </section>
+
+          <section>
+            <img src="http://ltib.org/graphics/ltib_build.png" />
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+sudo apt install make gcc g++ libncurses-dev unzip rpm bison patch tcl zlib1g-dev
+                                                                                
+wget https://github.com/downloads/midnightyell/RPi-LTIB/raspberrypi-tools-9c3d7b6-1.i386.rpm
+sudo mkdir -p /opt/ltib/pkgs/                                                   
+sudo cp raspberrypi-tools-9c3d7b6-1.i386.rpm /opt/ltib/pkgs/                    
+                                                                                
+sudo dpkg --add-architecture i386                                               
+sudo apt update                                                                 
+sudo apt install zlib1g:i386 libstdc++:i386                                     
+                                                                                
+wget http://download.savannah.nongnu.org/releases/ltib/ltib-13-2-1-sv.tar.gz    
+tar -xzf ltib-13-2-1-sv.tar.gz                                                  
+cd ltib-13-2-1-sv/                                                              
+time ./ltib                                                                     
+                                                                                
+# Platform choice (Raspberry Pi with BCM2835 SoC)                               
+                                                                                
+cp output/images/sdcard.img ~                                                   
+            </code></pre>
+          </section>
+
+          <section>
+            <img src="https://www.ptxdist.org/images/PTXdist_Logo_RGB.svg" />
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+sudo apt install make gcc g++ libncurses-dev unzip git gawk flex bison gettext python-dev lzop pkg-config libxml-parser-perl
+wget http://public.pengutronix.de/software/ptxdist/ptxdist-2018.01.0.tar.bz2    
+tar -xjf ptxdist-2018.01.0.tar.bz2                                              
+cd ptxdist-2018.01.0                                                            
+./configure                                                                     
+make                                                                            
+sudo make install                                                               
+cd ..                                                                           
+wget http://public.pengutronix.de/software/ptxdist/ptxdist-2016.06.0.tar.bz2    
+tar -xjf ptxdist-2016.06.0.tar.bz2                                              
+cd ptxdist-2016.06.0                                                            
+./configure                                                                     
+make                                                                            
+sudo make install                                                               
+cd ..                                                                           
+                                                                                
+wget https://public.pengutronix.de/oselas/toolchain/OSELAS.Toolchain-2016.06.1.tar.bz2
+tar -xjf OSELAS.Toolchain-2016.06.1.tar.bz2                                     
+cd OSELAS.Toolchain-2016.06.1/                                                  
+ptxdist-2016.06.0 select ptxconfigs/arm-1136jfs-linux-gnueabihf_gcc-5.4.0_glibc-2.23_binutils-2.26_kernel-4.6-sanitized.ptxconfig
+ptxdist-2016.06.0 migrate                                                       
+time ptxdist-2016.06.0 go                                                       
+                                                                                
+git clone https://git.pengutronix.de/cgit/DistroKit/                            
+cd DistroKit/                                                                   
+ptxdist-2018.01.0 platform configs/platform-rpi/platformconfig                  
+ptxdist-2018.01.0 migrate                                                       
+time ptxdist-2018.01.0 images                                                   
+cp platform-rpi/images/hd.img ~                                                 
+            </code></pre>
+          </section>
+
+          <section>
+            <img src="https://www.yoctoproject.org/wp-content/uploads/2020/05/YoctoProject_Logo_RGB_White_small.svg" />
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+wget http://commondatastorage.googleapis.com/git-repo-downloads/repo            
+chmod a+x repo                                                                  
+sudo mv repo /usr/local/bin/                                                    
+                                                                                
+sudo apt install make gcc g++ unzip git                                         
+sudo apt install gawk diffstat texinfo build-essential chrpath                  
+                                                                                
+export MACHINE=raspberrypi                                                      
+                                                                                
+mkdir yoctoproject                                                              
+cd yoctoproject                                                                 
+repo init -u https://github.com/cdynak/yocto-manifest -m $MACHINE.xml           
+repo sync                                                                       
+                                                                                
+source poky/oe-init-build-env                                                   
+%MACHINE=wandboard DISTRO=poky source setup-environment build                   
+% vi conf/bblayers.conf (...?)                                                  
+time bitbake core-image-minimal                                                 
+cp tmp/deploy/images/$MACHINE/*img ~                                            
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>Tests</h3>
+            <ul>
+              <li>With respect to the target OS</li>
+              <li>With respect to the host OS</li>
+            </ul>
+          </section>
+          <section>
+            <img src="img/cmpr-buildroot.png" />
+            <img src="img/cmpr-openwrt.png" />
+          </section>
+          <section>
+            <img src="img/cmpr-ptxdist.png" />
+            <img src="img/cmpr-yocto.png" />
+          </section>
+          <section>
+            <img src="img/hostOS.png" />
+          </section>
+          <section>
+            <h3>Example use cases</h3>
+            <ul>
+              <li>The Node.js IoT application</li>
+              <li>Building Containers</li>
+            </ul>
+          </section>
+        </section>
+
+        <!--section>
+          <section>
+            <h2>Node.js SCADA</h2>
+          </section>
+          <section>
+            <ul>
+              <li><a href="github.com/newterm/szarp">github.com/newterm/szarp</a> (C++/wxWidgets, MIT)</li>
+              <li><a href="github.com/RapidScada/scada">github.com/RapidScada/scada</a> (C#, Apache)</li>
+              <li><a href="github.com/SCADA-LTS/Scada-LTS">github.com/SCADA-LTS/Scada-LTS</a> (Java, GPLv2)</li>
+              <li><a href="github.com/trombastic/PyScada">github.com/trombastic/PyScada</a> (Python, GPLv3)</li>
+              <li><a href="oscada.org/websvn/listing.php?repname=OpenSCADA">oscada.org/websvn/listing.php?repname=OpenSCADA</a> (C++, GPLv2)</li>
+            </ul>
+          </section>
+        </section-->
+
+        <section>
+          <section>
+            <h2>Linux Containers</h2>
+          </section>
+          <!--section>
+            <h3>Containerization</h3>
+            <p>Operating-system-level virtualization, also known as
+            containerization,refers to an operating system feature in which
+            the kernel allows the existence of multiple isolated user-space
+            instances. Such instances, called containers</p>
+          </section-->
+          <section>
+            <h4>Currently there is one king</h4>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" />
+            <!-- https://en.wikipedia.org/wiki/File:Docker_(container_engine)_logo.svg -->
+          </section>
+          <!--section>
+            <img src="https://www.docker.com/sites/default/files/containers-vms-together.png" />
+          </section-->
+          <section>
+            <h3>How to make it work?</h3>
+            <ul>
+              <li>Download dedicated OS image from web</li>
+              <li>or... build own image!</li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce
+            </code></pre>
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+docker pull alpine
+docker images
+docker run alpine ls -l
+docker run -it alpine /bin/sh
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Building Linux Containers</h2>
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim contenteditable>
+cd output/images
+mkdir extra extra/etc extra/sbin extra/lib extra/lib64
+touch extra/etc/resolv.conf
+touch extra/sbin/init
+cp /lib/x86_64-linux-gnu/libpthread.so.0 /lib/x86_64-linux-gnu/libc.so.6 extra/lib
+cp /lib64/ld-linux-x86-64.so.2 extra/lib64
+ls extra/*
+cp rootfs.tar fixup.tar
+tar rvf --overwrite fixup.tar -C extra .
+docker import - basic-system < fixup.tar
+docker run -it basic-system /bin/sh
+            </code></pre>
+            <!-- https://blog.docker.com/2013/06/create-light-weight-docker-containers-buildroot/ -->
+          </section>
+        </section>
+
+
+
+        <section>
+          <section>
+            <h2>Thank you for attention</h2>
+          </section>
+          <section>
+            <h2>bibliography is inside source code</h2>
+            <p><a href="dynak-com.github.io/linux2021">cdynak.github.io/linux2018</a></p>
+            <p><a href="github.com/dynak-com/linux2021">github.com/cdynak/linux2018</a></p>
+            <p><a href="github.com/cdynak/embedded-linux-build-systems">github.com/cdynak/embedded-linux-build-systems</a></p>
+          </section>
+          <section>
+            <h2>discussion / questions?</h2>
+          </section>
+        </section>
+
       </div>
     </div>
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
     <script>
-      // cdynak notes
-      // https://chromium.googlesource.com/chromium/src/+/refs/heads/main/docs/linux/build_instructions.md
-      // https://www.youtube.com/watch?v=up1tk5kyFQU - HOW IT WORKS | Lego, Skyscrapers, Cake, Jacket | Episode 7 | Free Documentary
-      //
-      // my repos
-      // * https://github.com/cdynak/nodejs2021
-      // * https://github.com/dynak-com/linux2021
-      // * https://github.com/cdynak/nodejs2019
-      // * https://gitlab.com/cdynak/linux2019
-      // * https://gitlab.com/cdynak/linux2018
-      // * https://github.com/cdynak/linux2018
-      // * https://github.com/cdynak/linux2017
-
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-      });
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+  dependencies: [
+  { src: 'plugin/markdown/marked.js' },
+  { src: 'plugin/markdown/markdown.js' },
+  { src: 'plugin/notes/notes.js', async: true },
+  { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+  ]
+});
     </script>
   </body>
 </html>
